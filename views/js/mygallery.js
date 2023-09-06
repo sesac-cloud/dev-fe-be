@@ -14,7 +14,7 @@ $(document).ready(function () {
 
 function getUser() {
 	axios
-		.get('http://localhost:4000/users/getUsers', {
+		.get('http://www.jecheolso.site/users/getUsers', {
 		})
 		.then(( res ) => {
 			let row = res.data;
@@ -179,7 +179,7 @@ function closeImagePopup() {
 
 function logout() {
 	axios
-		.post('http://localhost:4000/auth/logout')
+		.post('http://www.jecheolso.site/auth/logout')
 		.then(( res ) => {
 			window.location.href = '/';
 		})
