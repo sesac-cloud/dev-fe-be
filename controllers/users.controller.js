@@ -27,7 +27,7 @@ sendMQ = async (req, res) => {
 const messageData = {
   animalType: result.objectLabel,
   userMail: userEmail,
-  originPhoto: result.uniqueFileName.split('-').slice(2).join('-'),
+  originPhoto: result.uniqueFileName,
 };
 
 
