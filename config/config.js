@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({ path: './env/.env' });
 const env = process.env;
 
 const development = {
@@ -7,7 +7,7 @@ const development = {
     database: env.AWS_RDS_DATABASE,
     host: env.AWS_RDS_HOST,
     dialect: 'mysql',
-    timezone: 'Asia/Seoul',
+    timezone: '+09:00',
 };
 
 const test = {
