@@ -1,0 +1,85 @@
+name: Node.js CI
+
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: read  # This is required for actions/checkout
+
+on:
+  push:
+    branches: [ "main" ]
+
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: ['16.x']
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v3 # More information on this action can be found below in the 'AWS Credentials' section
+      with:
+          aws-access-key-id: \${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: \${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: $AWS_REGION
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+      with:
+        mask-password: 'true'
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    # - run: npm ci  -> Dockerfile 안에 존재
+
+    # - run: npm run build --if-present  -> 배포판 위한 npm build 당장 필요 x
+
+    - name: Build, tag, and push docker image to Amazon ECR # Private
+      env:
+        REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        REPOSITORY: dev-frontend
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+        docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+
+    - name: Setup Kustomize
+      uses: imranismail/setup-kustomize@v1
+    
+    - name: Checkout kustomize repository
+      uses: actions/checkout@v3
+      with:
+        repository: $GITHUB_USERNAME/k8s-manifest-repo
+        ref: main
+        token: \${{ secrets.ACTION_TOKEN }}
+        path: k8s-manifest-repo
+
+    - name: Update Kubernetes resources
+      run: |
+        echo \${{ steps.login-ecr.outputs.registry }}
+        echo \${{ steps.image-info.outputs.ecr_repository }}
+        echo \${{ steps.image-info.outputs.image_tag }}
+        cd k8s-manifest-repo/overlays/dev/
+        kustomize edit set image \${{ steps.login-ecr.outputs.registry}}/\${{ steps.image-info.outputs.ecr_repository }}=\${{ steps.login-ecr.outputs.registry}}/\${{ steps.image-info.outputs.ecr_repository }}:\${{ steps.image-info.outputs.image_tag }}
+        cat kustomization.yaml
+    
+    - name: Commit files
+      run: |
+        cd k8s-manifest-repo
+        git config --global user.email "github-actions@github.com"
+        git config --global user.name "github-actions"
+        git commit -am "Update image tag"
+        git push -u origin main
