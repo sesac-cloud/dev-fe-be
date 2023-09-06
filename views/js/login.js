@@ -10,7 +10,7 @@ function login() {
 	console.log(userId, userPw);
 
 	axios
-		.post('http://localhost:4000/auth/login', {
+		.post('http://www.jecheolso.site/auth/login', {
 			username : userId,
 			password : userPw
 		})
