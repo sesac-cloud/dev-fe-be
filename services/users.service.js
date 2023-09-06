@@ -86,7 +86,7 @@ class UploadService {
 						// Upload processed image to S3
 						const uploadParams = {
 							Bucket : process.env.AWS_S3_BUCKET_NAME,
-							Key : uniqueFileName,
+							Key : 'origin/' + uniqueFileName,
 							Body : imageBytes,
 							ContentType : 'image/',
 						};

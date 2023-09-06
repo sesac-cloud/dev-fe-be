@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const path = require('path');
 const { sequelize } = require('./models');
-require('dotenv').config();
+require('dotenv').config({ path: './env/.env' });
 
 const router = require('./routes/index');
 const pageRouter = require('./routes/page');
