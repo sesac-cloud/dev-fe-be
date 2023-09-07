@@ -81,11 +81,13 @@ jobs:
         cat $MANIFEST_PATH
     
     - name: Commit files
+      env:
+        IMAGE_TAG: ${{ github.sha }}
       run: |
         cd k8s-manifest-repo
         git config --global user.email "kshhhhh91@gmail.com"
         git config --global user.name "kshhhhh91"
         git add .
-        git commit -m "Update image tag"
+        git commit -m "Update image tag: $IMAGE_TAG"
         git push -u origin main
         
