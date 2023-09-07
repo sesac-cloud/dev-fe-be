@@ -25,6 +25,7 @@ imageInput.addEventListener('change', function () {
 // 업로드 버튼 클릭 시 서버에 POST 요청을 보냅니다.
 uploadButton.addEventListener('click', function () {
 	const file = imageInput.files[0];
+	console.log('upload.js In / file : ', file);
 	if ( file ) {
 		// FormData 객체를 생성하고 이미지 파일을 추가합니다.
 		const formData = new FormData();
