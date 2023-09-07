@@ -81,5 +81,9 @@ jobs:
         cd k8s-manifest-repo
         git config --global user.email "kshhhhh91@gmail.com"
         git config --global user.name "kshhhhh91"
-        git commit -am "Update image tag"
-        git push -u origin main
+        if [[ $(git status --porcelain) ]]; then
+          git commit -am "Update image tag"
+          git push -u origin main
+        else
+          echo "No changes to commit"
+        fi
