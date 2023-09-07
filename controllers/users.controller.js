@@ -33,8 +33,8 @@ const messageData = {
 
     console.log('messageData', messageData);
 
-    await this.uploadService.sendMessage(messageData);
     await this.uploadService.insertUser(userEmail);
+    await this.uploadService.sendMessage(messageData);
 
     res.status(200).json({ message: 'Message sent successfully.' });
     console.log(messageData.objectURL);
