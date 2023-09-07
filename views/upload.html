@@ -9,8 +9,8 @@
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
   />
 
-  <title>Lineone - Price List v1</title>
-  <link rel="icon" type="image/png" href="images/favicon.png"/>
+   <title>SnapDog</title>
+    <link rel="icon" type="image/png" href="images/002.png" />
 
   <!-- CSS Assets -->
   <link rel="stylesheet" href="css/app.css"/>
@@ -67,7 +67,7 @@
       >
         <!-- Application Logo -->
         <div class="flex pt-4">
-          <a href="/mygallery">
+          <a href="/">
             <img
                 class="h-11 w-11 transition-transform duration-500 ease-in-out hover:rotate-[360deg]"
                 src="images/002.png"
@@ -5017,9 +5017,9 @@
         Welcome. Upload a picture of your lovely pet.
       </h3>
     </div>
-    <input type="file" id="imageInput" accept="image/*">
-    <div id="imagePreview">
-    </div>
+  <input type="file" id="imageInput" accept="image/*" style="display: none;">
+<label for="imageInput" id="uploadButton1" class="custom-upload-button">Select file</label>
+<div id="imagePreview"></div>
     <br>
     <br>
     <button
@@ -5054,5 +5054,21 @@
         background-size: cover;
         background-position: center;
     }
+    /* Add this CSS to style the custom upload button */
+.custom-upload-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff; /* Change the background color as desired */
+    color: #fff; /* Change the text color as desired */
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.custom-upload-button:hover {
+    background-color: #0056b3; /* Change the hover background color as desired */
+}
+
 </style>
 </html>
