@@ -14,13 +14,13 @@ $(document).ready(function () {
 
 function getUser() {
 	axios
-		.get('https://www.jecheolso.site/users/getUsers', {
+		.get(`${baseURL}/users/getUsers`, {
 		})
 		.then(( res ) => {
 			let row = res.data;
 			for ( let i in row ) {
 				let S3_URL = row[i].S3_URL;
-				let updateAt = row[i].updatedAt;
+				let updateAt = row[i].UPDATEDAT;
 
 
 				let imageList = `
@@ -117,7 +117,6 @@ function getUser() {
 }
 
 function showImagePopup(imageURL, updateAt) {
-  console.log('showImagePopup called');
   // 팝업을 표시하는 HTML을 생성합니다.
   let popupHTML = `
     <div class="image-popup-overlay">
@@ -179,7 +178,7 @@ function closeImagePopup() {
 
 function logout() {
 	axios
-		.post('https://www.jecheolso.site/auth/logout')
+		.post(`${baseURL}/auth/logout`)
 		.then(( res ) => {
 			window.location.href = '/';
 		})
