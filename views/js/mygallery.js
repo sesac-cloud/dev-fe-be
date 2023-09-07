@@ -13,7 +13,6 @@ $(document).ready(function () {
 
 
 function getUser() {
-	console.log("getUser 함수 IN");
 	axios
 		.get(`${baseURL}/users/getUsers`, {
 		})
