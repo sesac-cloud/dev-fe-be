@@ -77,7 +77,7 @@ jobs:
       run: |
         MANIFEST_PATH="k8s-manifest-repo/fe-be/fe-deployment.yaml" 
         NEW_IMAGE="$REGISTRY/$REPOSITORY:$IMAGE_TAG"
-        sed -i "s|image:.*|image: $REGISTRY\/$ECR_REPOSITORY:$IMAGE_TAG|" $MANIFEST_PATH
+        sed -i "s|image:.*|image: $REGISTRY\/$REPOSITORY:$IMAGE_TAG|" $MANIFEST_PATH
         cat $MANIFEST_PATH
     
     - name: Commit files
