@@ -1,5 +1,4 @@
 const env = process.env;
-console.log(env.AWS_RABBITMQ_USERNAME);
 
 const rabbitmqConfig = {
   // Error : Frame size exceeds frame max -> amqp에 s 추가하니까 해결.
