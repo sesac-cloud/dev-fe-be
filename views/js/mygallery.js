@@ -13,6 +13,7 @@ $(document).ready(function () {
 
 
 function getUser() {
+	console.log("getUser 함수 IN");
 	axios
 		.get(`${baseURL}/users/getUsers`, {
 		})
@@ -112,7 +113,11 @@ function getUser() {
 
 			}
 
-		});
+		})
+		.catch(( err ) => {
+			console.log(err);
+
+		})
 
 }
 
@@ -172,9 +177,6 @@ function showImagePopup(imageURL, updateAt) {
 function closeImagePopup() {
   $('.image-popup-overlay').remove();
 }
-
-
-
 
 function logout() {
 	axios

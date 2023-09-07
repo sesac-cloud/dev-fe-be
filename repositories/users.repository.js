@@ -25,7 +25,7 @@ class UsersRepository {
 			},
 		});
 
-		const hasNStatus = findUser.some(( user ) => user.status === 'N');
+		const hasNStatus = findUser.some(( user ) => user.STATUS === 'N');
 
 		if ( hasNStatus ) {
 			// 이미 'N'인 상태가 하나라도 있는 경우 메시지를 반환합니다.
