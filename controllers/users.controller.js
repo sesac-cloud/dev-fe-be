@@ -10,7 +10,11 @@ class UploadController {
 
 sendMQ = async (req, res) => {
   const userEmail = req.user.email;
+  console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+  console.log('users.controller.js SendMQ IN');
+  console.log('co / userEmail > ', userEmail);
   const userCheck = await this.uploadService.findUser(userEmail);
+  console.log('userCheck > ', userCheck);
 
   if (userCheck.errorMessage) {
     return res.status(400).json({ errorMessage: userCheck.errorMessage });
@@ -18,6 +22,7 @@ sendMQ = async (req, res) => {
 
   try {
     const result = await this.uploadService.processRekognition(req);
+    console.log('co / uploadService.processRekognition -> result > ', result);
 
     if (result.error) {
       return res.status(400).json({ error: result.error });

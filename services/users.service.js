@@ -36,6 +36,7 @@ class UploadService {
 
 	findUser = async ( userEmail ) => {
 		const result = await this.uploadRepository.findUser(userEmail);
+		console.log('user.service findUser().result : > ', result);
 		return result;
 	};
 
