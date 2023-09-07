@@ -8,19 +8,8 @@ class UploadController {
 		this.uploadService = new UploadService();
 	}
 
-test = async ( req, res ) => {
-  console.log('users.controller.js test11111 IN');
-}
-
-test2 = async ( req, res ) => {
-  console.log('users.controller.js test2222222 IN');
-}
-
 sendMQ = async (req, res) => {
   const userEmail = req.user.email;
-  console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-  console.log('users.controller.js SendMQ IN');
-  console.log('co / userEmail > ', userEmail);
   const userCheck = await this.uploadService.findUser(userEmail);
 
   if (userCheck.errorMessage) {
@@ -40,9 +29,6 @@ const messageData = {
   userMail: userEmail,
   originPhoto: result.uniqueFileName,
 };
-
-
-    console.log('messageData', messageData);
 
     await this.uploadService.insertUser(userEmail);
     await this.uploadService.sendMessage(messageData);

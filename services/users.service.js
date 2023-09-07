@@ -36,7 +36,6 @@ class UploadService {
 
 	findUser = async ( userEmail ) => {
 		const result = await this.uploadRepository.findUser(userEmail);
-		console.log('user.service findUser().result : > ', result);
 		return result;
 	};
 
@@ -101,7 +100,6 @@ class UploadService {
 						return resolve({ error : 'The uploaded image is not a cat or dog.' });
 					}
 				} catch ( err ) {
-					console.error('Error in rekognition middleware:', err);
 					return resolve({ error : 'Error in rekognition middleware' });
 				}
 			});

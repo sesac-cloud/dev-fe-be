@@ -9,9 +9,6 @@ const userRouter = require('./users.routes');
 router.use('/auth', authRouter);
 router.use('/users', userRouter);
 
-console.log('index.js');
-
-
 router.get('/a', async (req, res) => {
 res.status(200).json({status: "200", message: 'ok'});
 });

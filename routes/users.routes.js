@@ -7,13 +7,7 @@ const multer = require("multer");
 const router = express.Router();
 const uploadController = new UploadController();
 
-console.log('users.routes.js');
-router.post('/uploads',authMiddleware,uploadController.sendMQ, uploadController.test2);
+router.post('/uploads',authMiddleware,uploadController.sendMQ);
 router.get('/getUsers',authMiddleware, uploadController.getUser);
-
-router.get('/a', async (req, res) => {
-res.status(200).json({status: "200", message: 'ok'});
-});
-
 
 module.exports = router;
