@@ -37,7 +37,10 @@ uploadButton.addEventListener('click', function () {
 					'업로드 완료!',
 					'작업이 완료되면 <b style="color:green;">메일로 </b> 알려드릴께요!',
 					'success'
-				);
+				).then(() => {
+					// 확인 버튼을 누른 후에 실행될 코드
+					window.location.href = '/mygallery';
+				});
 			})
 			.catch(error => {
 				if ( error.response.data.error ) {
@@ -45,14 +48,20 @@ uploadButton.addEventListener('click', function () {
 						'',
 						'<b style="color:coral;">강아지 </b>or <b style="color:coral;">고양이</b> 아닙니다! 다시 확인해주세요!',
 						'warning'
-					);
+					).then(() => {
+					// 확인 버튼을 누른 후에 실행될 코드
+					window.location.reload();
+				});
 
 				}else {
 					swal(
 					'',
 					'<b style="color:cornflowerblue;">작업중인 </b>사진이 있습니다.',
 					'info'
-				);
+				).then(() => {
+					// 확인 버튼을 누른 후에 실행될 코드
+					window.location.reload();
+				});
 			}
 				});
 
