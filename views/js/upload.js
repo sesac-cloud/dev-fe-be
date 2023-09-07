@@ -22,6 +22,20 @@ imageInput.addEventListener('change', function () {
 	}
 });
 
+$(document).ready(function () {
+	aa();
+});
+
+//test
+function aa() {
+	axios
+	.post(`${baseURL}/a`,)
+			.then(( res ) => {
+				console.log('upload.js In / axios.post / res : ', res);
+			})
+}
+
+
 // 업로드 버튼 클릭 시 서버에 POST 요청을 보냅니다.
 uploadButton.addEventListener('click', function () {
 	const file = imageInput.files[0];
@@ -30,6 +44,13 @@ uploadButton.addEventListener('click', function () {
 		// FormData 객체를 생성하고 이미지 파일을 추가합니다.
 		const formData = new FormData();
 		formData.append('file', file);
+
+		axios
+	.post(`${baseURL}/a`,)
+			.then(( res ) => {
+				console.log('upload.js In / axios.post / res : ', res);
+			})
+
 
 		// Axios를 사용하여 서버에 POST 요청을 보냅니다.
 		axios.post(`${baseURL}/users/uploads`, formData)
