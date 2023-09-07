@@ -8,13 +8,20 @@ class UploadController {
 		this.uploadService = new UploadService();
 	}
 
+test = async ( req, res ) => {
+  console.log('users.controller.js test11111 IN');
+}
+
+test2 = async ( req, res ) => {
+  console.log('users.controller.js test2222222 IN');
+}
+
 sendMQ = async (req, res) => {
   const userEmail = req.user.email;
   console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
   console.log('users.controller.js SendMQ IN');
   console.log('co / userEmail > ', userEmail);
   const userCheck = await this.uploadService.findUser(userEmail);
-  console.log('userCheck > ', userCheck);
 
   if (userCheck.errorMessage) {
     return res.status(400).json({ errorMessage: userCheck.errorMessage });
@@ -22,7 +29,6 @@ sendMQ = async (req, res) => {
 
   try {
     const result = await this.uploadService.processRekognition(req);
-    console.log('co / uploadService.processRekognition -> result > ', result);
 
     if (result.error) {
       return res.status(400).json({ error: result.error });
@@ -42,7 +48,6 @@ const messageData = {
     await this.uploadService.sendMessage(messageData);
 
     res.status(200).json({ message: 'Message sent successfully.' });
-    console.log(messageData.objectURL);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'An error occurred while sending the message.' });

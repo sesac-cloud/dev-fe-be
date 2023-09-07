@@ -9,7 +9,6 @@ router.get('/mygallery', authMiddleware ,(req, res) => {
   res.render('mygallery');
 });
 router.get('/login', (req, res) => {
-  // res.sendFile(path.join(__dirname, '/../webui/index.html'));
   res.render('login');
 });
 router.get('/upload',authMiddleware, (req, res) => {

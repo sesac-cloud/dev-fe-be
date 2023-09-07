@@ -22,30 +22,14 @@ imageInput.addEventListener('change', function () {
 	}
 });
 
-$(document).ready(function () {
-	aa();
-});
-
-//test
-function aa() {
-	axios
-	.get(`${baseURL}/a`,)
-			.then(( res ) => {
-				console.log('upload.js In / axios.post / res : ', res);
-			})
-}
-
-console.log('baseURL : ', baseURL);
-
 // 업로드 버튼 클릭 시 서버에 POST 요청을 보냅니다.
 uploadButton.addEventListener('click', function () {
 	const file = imageInput.files[0];
+	console.log('upload.js In / file : ', file);
 	if ( file ) {
 		// FormData 객체를 생성하고 이미지 파일을 추가합니다.
 		const formData = new FormData();
 		formData.append('file', file);
-
-		console.log('upload.js In / uploadButton.addEventListener / formData : ', formData);
 
 		// Axios를 사용하여 서버에 POST 요청을 보냅니다.
 		axios.post(`${baseURL}/users/uploads`, formData)
@@ -54,7 +38,10 @@ uploadButton.addEventListener('click', function () {
 					'업로드 완료!',
 					'작업이 완료되면 <b style="color:green;">메일로 </b> 알려드릴께요!',
 					'success'
-				);
+				).then(() => {
+					// 확인 버튼을 누른 후에 실행될 코드
+					window.location.href = '/mygallery';
+				});
 			})
 			.catch(error => {
 				if ( error.response.data.error ) {
@@ -62,15 +49,23 @@ uploadButton.addEventListener('click', function () {
 						'',
 						'<b style="color:coral;">강아지 </b>or <b style="color:coral;">고양이</b> 아닙니다! 다시 확인해주세요!',
 						'warning'
-					);
+					).then(() => {
+					// 확인 버튼을 누른 후에 실행될 코드
+					window.location.reload();
+				});
+
 				}else {
 					swal(
 					'',
 					'<b style="color:cornflowerblue;">작업중인 </b>사진이 있습니다.',
 					'info'
-				);
+				).then(() => {
+					// 확인 버튼을 누른 후에 실행될 코드
+					window.location.reload();
+				});
 			}
 				});
+
 	} else {
 		swal(
 			'',
