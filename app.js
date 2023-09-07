@@ -30,6 +30,14 @@ sequelize
   .sync({ force: false })
   .then(() => {
     console.log('데이터베이스 연결 성공!');
+	  console.log();
+	  console.log('*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-');
+	  console.log('PORT : ', env.PORT);
+	  console.log('S3_BUCKET_NAME : ', env.AWS_S3_BUCKET_NAME);
+	  console.log('RDS_USERNAME : ', env.AWS_RDS_USERNAME);
+	  console.log('RDS_DATABASE: ', env.AWS_RDS_DATABASE);
+	  console.log('RABBITMQ_USERNAME : ', env.AWS_RABBITMQ_USERNAME);
+	  console.log('*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-');
   })
   .catch((err) => {
     console.error(err);
