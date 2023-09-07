@@ -36,19 +36,6 @@ sequelize
   });
 
 
-///////////////////////////////////////////////////////////////////
-const authMiddleware = require('./middlewares/auth.middleware');
-
-// app.get('/a',authMiddleware, async (req, res) =>
-// {
-// res.sendFile(path.join(__dirname + '/views/mygallery.html'));
-// });
-
-
-///////////////////////////////////////////////////////////////////
-
-
-
 app.listen(env.PORT || 4000, () => {
 	console.log(`Server running on http://localhost:${ env.PORT }`);
 });

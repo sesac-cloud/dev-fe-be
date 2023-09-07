@@ -7,8 +7,8 @@ class UsersRepository {
 	insertUser = async ( userEmail ) => {
 			try {
 					const result = await this.userModel.create({
-						email : userEmail,
-						status : 'N',
+						EMAIL : userEmail,
+						STATUS : 'N',
 					});
 					return result;
 			} catch ( error ) {
@@ -21,7 +21,7 @@ class UsersRepository {
 		// 해당 이메일로 된 모든 레코드를 찾습니다.
 		const findUser = await this.userModel.findAll({
 			where : {
-				email : userEmail,
+				EMAIL : userEmail,
 			},
 		});
 
@@ -38,8 +38,8 @@ class UsersRepository {
 		// 해당 이메일로 된 모든 레코드를 찾습니다.
 		return await this.userModel.findAll({
 			where : {
-				email : userEmail,
-				status : 'Y',
+				EMAIL : userEmail,
+				STATUS : 'Y',
 			},
 		});
 	}

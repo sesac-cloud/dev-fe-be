@@ -1,16 +1,11 @@
-document.addEventListener('keydown', function(event) {
-  if (event.key === 'Enter') {
-    login();
-  }
-});
-
+// view-config.js 를 여기서 가져다 사용하고싶음.
 function login() {
 	const userId = document.getElementById('userId').value;
 	const userPw = document.getElementById('userPw').value;
-	console.log(userId, userPw);
+
 
 	axios
-		.post('https://www.jecheolso.site/auth/login', {
+		.post(`${baseURL}/auth/login`, {
 			username : userId,
 			password : userPw
 		})
