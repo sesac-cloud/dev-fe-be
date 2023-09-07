@@ -29,12 +29,13 @@ $(document).ready(function () {
 //test
 function aa() {
 	axios
-	.post(`${baseURL}/a`,)
+	.get(`${baseURL}/a`,)
 			.then(( res ) => {
 				console.log('upload.js In / axios.post / res : ', res);
 			})
 }
 
+console.log('baseURL : ', baseURL);
 
 // 업로드 버튼 클릭 시 서버에 POST 요청을 보냅니다.
 uploadButton.addEventListener('click', function () {
@@ -46,14 +47,14 @@ uploadButton.addEventListener('click', function () {
 		formData.append('file', file);
 
 		axios
-	.post(`${baseURL}/a`,)
+	.get(`${baseURL}/a`,)
 			.then(( res ) => {
 				console.log('upload.js In / axios.post / res : ', res);
 			})
 
 
 		// Axios를 사용하여 서버에 POST 요청을 보냅니다.
-		axios.post(`${baseURL}/users/uploads`, formData)
+		axios.post(`https://www.jecheolso.site/users/uploads`, formData)
 			.then(res => {
 				swal(
 					'업로드 완료!',
