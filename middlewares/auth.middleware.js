@@ -32,7 +32,8 @@ module.exports = (req, res, next) => {
     const publicKey = key.publicKey || key.rsaPublicKey;
     jwt.verify(accessToken, publicKey, (verifyError, decoded) => {
       if (verifyError) {
-        return res.status(401).json({ message: 'Invalid access token' });
+        res.render('pagesError401');
+        // return res.status(401).json({ message: 'Invalid access token' });
       }
 
       req.user = decoded;

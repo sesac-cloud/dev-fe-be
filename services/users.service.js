@@ -14,14 +14,15 @@ class UploadService {
 		this.s3Client = new S3Client({ region : process.env.AWS_REGION });
 	}
 
-
 	sendMessage = async ( messageData ) => {
 		const connection = await amqp.connect(rabbitmqConfig);
 		const channel = await connection.createChannel();
 
 		const queueName = process.env.AWS_RABBITMQ_QUEUE_NAME; // 사용할 큐 이름
 
-		await channel.assertQueue(queueName, { durable : false });
+		await channel.assertQueue(queueName, { durable : true ,arguments: {
+            'x-dead-letter-exchange': "DLX"
+          } });
 
 		const message = JSON.stringify(messageData);
 		channel.sendToQueue(queueName, Buffer.from(message));
