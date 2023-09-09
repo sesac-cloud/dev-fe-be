@@ -29,6 +29,9 @@
   <!-- Special script for current page -->
   <script src="js/upload.js" defer></script>
 
+  <script src="https://unpkg.com/@yaireo/tagify"></script>
+  <link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -5017,8 +5020,12 @@
         Welcome. Upload a picture of your lovely pet.
       </h3>
     </div>
+    <div>
+
+    <input placeholder="Select Background" id="promptBackImage" class="promptBackImage" >
   <input type="file" id="imageInput" accept="image/*" style="display: none;">
-<label for="imageInput" id="uploadButton1" class="custom-upload-button">Select file</label>
+<label for="imageInput" id="uploadButton1" class="custom-upload-button">Select File</label>
+    </div>
 <div id="imagePreview"></div>
     <br>
     <br>
@@ -5069,6 +5076,8 @@
 .custom-upload-button:hover {
     background-color: #0056b3; /* Change the hover background color as desired */
 }
-
+.promptBackImage {
+    border: 2px solid #61cd5d; /* 파란색 테두리 설정 */
+}
 </style>
 </html>

@@ -14,7 +14,6 @@
     "@aws-sdk/client-rekognition": "^3.398.0",
     "@aws-sdk/client-s3": "^3.400.0",
     "amazon-cognito-identity-js": "^6.3.5",
-    "axios": "^1.4.0",
     "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.3.1",
