@@ -22,7 +22,7 @@ class UploadService {
 
 		await channel.assertQueue(queueName, {
 			durable : true, arguments : {
-				'x-dead-letter-exchange' : "DLX"
+				'x-dead-letter-exchange' : "MA-DLX"
 			}
 		});
 
