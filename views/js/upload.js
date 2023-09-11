@@ -17,9 +17,6 @@ let tagify = new Tagify(promptBackImage, {
   enforceWhitelist: true
 });
 
-
-
-
 let selectedTags = [];
 
 tagify.on('add', function () {
@@ -28,10 +25,7 @@ tagify.on('add', function () {
 	}
 
 	selectedTags = tagify.value;
-	console.log(selectedTags); // Log the selected tags
 });
-
-
 
 // 기본 이미지 경로 설정
 const defaultImageURL = '../images/005.png';
@@ -59,52 +53,62 @@ imagePreview.addEventListener('click', function () {
 });
 
 // 업로드 버튼 클릭 시 서버에 POST 요청을 보냅니다.
+// 업로드 버튼 클릭 시 서버에 POST 요청을 보냅니다.
 uploadButton.addEventListener('click', function () {
     const file = imageInput.files[0];
     if (file) {
-        // FormData 객체를 생성하고 이미지 파일 및 선택된 태그를 추가합니다.
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('tags', JSON.stringify(selectedTags))
+        if (selectedTags.length === 0) {
+            // 선택된 태그가 없는 경우 알림 표시
+            swal(
+                '',
+                '<b style="color:#85D6E1FF;">배경</b>을 선택해주세요!',
+                'warning'
+            );
+        } else {
+            // FormData 객체를 생성하고 이미지 파일 및 선택된 태그를 추가합니다.
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('tags', JSON.stringify(selectedTags));
 
-		// Axios를 사용하여 서버에 POST 요청을 보냅니다.
-		axios.post(`${ baseURL }/users/uploads`, formData)
-			.then(res => {
-				swal(
-					'업로드 완료!',
-					'작업이 완료되면 <b style="color:green;">메일로 </b> 알려드릴께요!',
-					'success'
-				).then(() => {
-					// 확인 버튼을 누른 후에 실행될 코드
-					window.location.href = '/mygallery';
-				});
-			})
-			.catch(error => {
-				if ( error.response.data.error ) {
-					swal(
-						'',
-						'<b style="color:coral;">강아지 </b>or <b style="color:coral;">고양이</b> 아닙니다! 다시 확인해주세요!',
-						'warning'
-					).then(() => {
-						// 확인 버튼을 누른 후에 실행될 코드
-						window.location.reload();
-					});
-				} else {
-					swal(
-						'',
-						'<b style="color:cornflowerblue;">작업중인 </b>사진이 있습니다.',
-						'info'
-					).then(() => {
-						// 확인 버튼을 누른 후에 실행될 코드
-						window.location.reload();
-					});
-				}
-			});
-	} else {
-		swal(
-			'',
-			'<b style="color:coral;">사진 </b>을 선택해주세요!',
-			'warning'
-		);
-	}
+            // Axios를 사용하여 서버에 POST 요청을 보냅니다.
+            axios.post(`${baseURL}/users/uploads`, formData)
+                .then(res => {
+                    swal(
+                        '업로드 완료!',
+                        '작업이 완료되면 <b style="color:green;">메일로 </b> 알려드릴께요!',
+                        'success'
+                    ).then(() => {
+                        // 확인 버튼을 누른 후에 실행될 코드
+                        window.location.href = '/mygallery';
+                    });
+                })
+                .catch(error => {
+                    if (error.response.data.error) {
+                        swal(
+                            '',
+                            '<b style="color:coral;">강아지 </b>or <b style="color:coral;">고양이</b> 아닙니다! 다시 확인해주세요!',
+                            'warning'
+                        ).then(() => {
+                            // 확인 버튼을 누른 후에 실행될 코드
+                            window.location.reload();
+                        });
+                    } else {
+                        swal(
+                            '',
+                            '<b style="color:cornflowerblue;">작업중인 </b>사진이 있습니다.',
+                            'info'
+                        ).then(() => {
+                            // 확인 버튼을 누른 후에 실행될 코드
+                            window.location.reload();
+                        });
+                    }
+                });
+        }
+    } else {
+        swal(
+            '',
+            '<b style="color:coral;">사진 </b>을 선택해주세요!',
+            'warning'
+        );
+    }
 });

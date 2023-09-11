@@ -5017,12 +5017,15 @@
       <h3
           class="mt-1 text-xl font-semibold text-slate-600 dark:text-navy-100"
       >
-        Welcome. Upload a picture of your lovely pet.
+         You can make a special <span style="color: #017272;">travel snapshot</span> for your pet here.
       </h3>
     </div>
     <div>
+<div class="inputContainer">
+  <img src="images/006.png" class="image" style="width: 100px; height: 70px;">
+  <input placeholder="Select just One background" id="promptBackImage" class="promptBackImage">
+</div>
 
-    <input placeholder="Select Background" id="promptBackImage" class="promptBackImage" >
   <input type="file" id="imageInput" accept="image/*" style="display: none;">
 <!--<label for="imageInput" id="uploadButton1" class="custom-upload-button"></label>-->
     </div>
@@ -5078,16 +5081,26 @@
 }
 
 .promptBackImage {
+    margin-top: 17px;
     border: 2px solid #85d6e1;
     width: 400px;
     text-align: center;
     border-radius: 10px; /* 둥글게 만들 픽셀 값을 조절할 수 있습니다. */
 }
 
-
 #imagePreview {
     cursor: pointer;
     border-radius: 50px;
+}
+
+.centered-text {
+  text-align: center; /* 텍스트를 가운데 정렬하는 CSS 속성 */
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center; /* 요소들을 수직 중앙 정렬 */
+  justify-content: flex-start; /* 요소들을 수평 왼쪽 정렬 */
 }
 
 </style>
