@@ -5024,7 +5024,7 @@
 
     <input placeholder="Select Background" id="promptBackImage" class="promptBackImage" >
   <input type="file" id="imageInput" accept="image/*" style="display: none;">
-<label for="imageInput" id="uploadButton1" class="custom-upload-button">Select File</label>
+<!--<label for="imageInput" id="uploadButton1" class="custom-upload-button"></label>-->
     </div>
 <div id="imagePreview"></div>
     <br>
@@ -5074,10 +5074,21 @@
 }
 
 .custom-upload-button:hover {
-    background-color: #0056b3; /* Change the hover background color as desired */
+    background-color: #0056b3;
 }
+
 .promptBackImage {
-    border: 2px solid #61cd5d; /* 파란색 테두리 설정 */
+    border: 2px solid #85d6e1;
+    width: 400px;
+    text-align: center;
+    border-radius: 10px; /* 둥글게 만들 픽셀 값을 조절할 수 있습니다. */
 }
+
+
+#imagePreview {
+    cursor: pointer;
+    border-radius: 50px;
+}
+
 </style>
 </html>

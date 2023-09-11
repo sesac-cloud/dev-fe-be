@@ -6,17 +6,19 @@ const promptBackImage = document.getElementById('promptBackImage'); // 업로드
 
 let whitelist = ["Beach", "Mountain", "Space", "Forest", "Lake", "City", "Sunset", "Island", "Desert", "River", "Park", "Countryside", "Meadow", "Bridge", "Waterfall", "Harbor", "Valley", "Cave", "Glacier", "Volcano"];
 let tagify = new Tagify(promptBackImage, {
-	maxTags : 1,
-	enforceWhitelist: true,
-	 // whitelist: promptBackImage.value.trim().split(/\s*,\s*/),
-	 whitelist: whitelist,
-	dropdown: {
-        maxItems: 20,
-        classname: "tags-look",
-        enabled: 0,
-        closeOnSelect: true
-      }
+  maxTags: 1,
+  whitelist: whitelist,
+  dropdown: {
+    maxItems: 20,
+    classname: "tags-look",
+    enabled: 0,
+    closeOnSelect: true
+  },
+  enforceWhitelist: true
 });
+
+
+
 
 let selectedTags = [];
 
@@ -28,6 +30,8 @@ tagify.on('add', function () {
 	selectedTags = tagify.value;
 	console.log(selectedTags); // Log the selected tags
 });
+
+
 
 // 기본 이미지 경로 설정
 const defaultImageURL = '../images/005.png';
@@ -47,6 +51,11 @@ imageInput.addEventListener('change', function () {
 		// 이미지를 선택하지 않은 경우 미리보기를 초기화하고 기본 이미지를 표시합니다.
 		imagePreview.style.backgroundImage = `url(${ defaultImageURL })`;
 	}
+});
+
+// 이미지 미리보기 클릭 시 파일 업로드 창 띄우기
+imagePreview.addEventListener('click', function () {
+    imageInput.click(); // 파일 업로드 창 열기
 });
 
 // 업로드 버튼 클릭 시 서버에 POST 요청을 보냅니다.
@@ -99,4 +108,3 @@ uploadButton.addEventListener('click', function () {
 		);
 	}
 });
-
