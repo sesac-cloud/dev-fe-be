@@ -20,14 +20,15 @@ class UploadService {
 
 		const queueName = process.env.AWS_RABBITMQ_QUEUE_NAME; // 사용할 큐 이름
 
-		await channel.assertQueue(queueName, { durable : true ,arguments: {
-            'x-dead-letter-exchange': "DLX"
-          } });
+		await channel.assertQueue(queueName, {
+			durable : true, arguments : {
+				'x-dead-letter-exchange' : "MA-DLX"
+			}
+		});
 
 		const message = JSON.stringify(messageData);
 		channel.sendToQueue(queueName, Buffer.from(message));
 
-		console.log(`Sent: ${ message }`);
 	};
 
 	insertUser = async ( userEmail ) => {
@@ -55,6 +56,7 @@ class UploadService {
 				} else if ( error ) {
 					return resolve({ error : 'Unknown error' });
 				}
+
 
 				const imageBytes = req.file.buffer;
 				const userEmail = req.user.email;
@@ -95,8 +97,13 @@ class UploadService {
 						const uploadCommand = new PutObjectCommand(uploadParams);
 						await this.s3Client.send(uploadCommand);
 
-						// return resolve({ uniqueFileNameEncoded,objectLabel });
-						return resolve({ uniqueFileName,objectLabel });
+						const tagsArray = JSON.parse(req.body.tags);
+						const tag = tagsArray.map(tagObject => tagObject.value);
+						const tagTrim = tag.join('').replace(/[^a-zA-Z0-9가-힣]/g, '');
+
+						const bgPrompt = `${objectLabel} in ${tagTrim}`
+
+						return resolve({ uniqueFileName, objectLabel, bgPrompt });
 					} else {
 						return resolve({ error : 'The uploaded image is not a cat or dog.' });
 					}
@@ -112,27 +119,6 @@ class UploadService {
 		const rekoImage = multer({ storage : storage });
 		return rekoImage.single('file');
 	}
-
-
-	// test2 = async () => {
-	// 	{
-	// 		const connection = await amqp.connect(rabbitmqConfig);
-	// 		const channel = await connection.createChannel();
-	//
-	// 		const queueName = process.env.AWS_RABBITMQ_QUEUE_NAME; // 사용할 큐 이름
-	//
-	// 		await channel.assertQueue(queueName, { durable : false });
-	//
-	// 		return new Promise(( resolve, reject ) => {
-	// 			channel.consume(queueName, ( msg ) => {
-	// 				console.log('msg', msg);
-	// 				const receivedMessage = msg.content.toString();
-	// 				console.log(`Received: ${ receivedMessage }`);
-	// 				resolve(receivedMessage);
-	// 			}, { noAck : true });
-	// 		});
-	// 	}
-	// };
 
 }
 
