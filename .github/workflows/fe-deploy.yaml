@@ -39,7 +39,7 @@ jobs:
     - name: Build, tag, and push docker image to Amazon ECR # Private
       env:
         REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        REPOSITORY: dev-frontend
+        REPOSITORY: prod-frontend
         IMAGE_TAG: ${{ github.sha }}
       run: |
         docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
@@ -54,7 +54,7 @@ jobs:
     - name: Update Kubernetes resources
       env:
         REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        REPOSITORY: dev-frontend
+        REPOSITORY: prod-frontend
         IMAGE_TAG: ${{ github.sha }}
       run: |
         MANIFEST_PATH="k8s-manifest-repo/fe-be/fe-deployment.yaml" 
