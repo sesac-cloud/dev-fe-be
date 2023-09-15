@@ -70,10 +70,6 @@ jobs:
         git config --global user.email "kshhhhh91@gmail.com"
         git config --global user.name "kshhhhh91"
         git add .
-        if [[ $(git status --porcelain) ]]; then
-          git commit -m "Update image tag"
-          git push -u origin main
-        else
-          echo "No changes to commit"
-        fi
+        git commit -m "Update image tag: $IMAGE_TAG"
+        git push -u origin main
         
