@@ -25,10 +25,6 @@ app.use('/', router);
 app.use('/', pageRouter);
 app.use(pageErrorMiddleware.pageNotFoundError);
 
-sequelize
-  .sync({ force: false })
-  .then(() => {
-    console.log('데이터베이스 연결 성공!');
 	  console.log();
 	  console.log('*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-');
 	  console.log('PORT : ', env.PORT);
@@ -37,6 +33,12 @@ sequelize
 	  console.log('RDS_DATABASE: ', env.AWS_RDS_DATABASE);
 	  console.log('RABBITMQ_USERNAME : ', env.AWS_RABBITMQ_USERNAME);
 	  console.log('*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-');
+
+sequelize
+  .sync({ force: false })
+  .then(() => {
+    console.log('데이터베이스 연결 성공!');
+
   })
   .catch((err) => {
     console.error(err);
