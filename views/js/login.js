@@ -1,3 +1,9 @@
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {
+    login();
+  }
+});
+
 // view-config.js 를 여기서 가져다 사용하고싶음.
 function login() {
 	const userId = document.getElementById('userId').value;
