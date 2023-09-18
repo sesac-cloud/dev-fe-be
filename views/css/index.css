@@ -1,3 +1,14 @@
+
+body {
+ background: #e1A7FA;
+  /* background: #e6ffff; */
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .loader {
   position: relative;
   width: 2000px;
@@ -1403,15 +1414,6 @@
 html,
 body {
   overflow: hidden;
-}
-
-body {
-  background: #e6ffff;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .h1,
