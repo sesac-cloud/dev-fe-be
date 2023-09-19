@@ -1406,8 +1406,8 @@ body {
 }
 
 body {
- background: #e1A7FA;
-/*   background: #e6ffff; */
+/*  background: #e1A7FA; */
+  background: #e6ffff;
   width: 100vw;
   height: 100vh;
   display: flex;
